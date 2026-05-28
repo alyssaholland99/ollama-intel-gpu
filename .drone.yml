@@ -23,9 +23,7 @@ steps:
         - weekly-build
       branch:
         include:
-          - master
-          - stable/*
-          - stable-full/*
+          - main
     image: plugins/docker
     settings:
       username:
