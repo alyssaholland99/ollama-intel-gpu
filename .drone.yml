@@ -17,10 +17,6 @@ steps:
       event:
         include: 
         - push
-        - cron
-      cron:
-        include:
-        - weekly-build
       branch:
         include:
           - main
