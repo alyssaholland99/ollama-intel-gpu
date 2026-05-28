@@ -1,21 +1,17 @@
 ---
-kind: pipeline
 type: docker
-name: stable
-
-trigger:
-  event:
-    - push
+kind: pipeline
+name: default
 
 steps:
-  - name: docker build
-    image: plugins/docker
-    settings:
-      username:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username:
         from_secret: DOCKERHUB_USER
-      password:
-        from_secret: DOCKERHUB_PASS
-      repo:
-        from_secret: DOCKERHUB_REPOSITORY
-      tags:
-        - latest
+    password:
+      from_secret: DOCKERHUB_PASS
+    repo:
+      from_secret: DOCKERHUB_REPOSITORY
+    tags:
+    - latest
