@@ -44,9 +44,9 @@ ARG LEVEL_ZERO_LOADER_VERSION=v1.21.9
 ARG LEVEL_ZERO_LOADER_DEB=level-zero_1.21.9+u24.04_amd64.deb
 
 # IPEX-LLM Ollama portable package
-ARG IPEXLLM_RELEASE_REPO=ipex-llm/ipex-llm
-ARG IPEXLLM_RELEASE_VERSION=v2.3.0-nightly
-ARG IPEXLLM_PORTABLE_ZIP=ollama-ipex-llm-2.3.0b20250725-ubuntu.tgz
+ARG IPEXLLM_RELEASE_REPO=alyssaholland99/ipex-llm
+ARG IPEXLLM_RELEASE_VERSION=v3.0.0
+ARG IPEXLLM_PORTABLE_ZIP=ollama-ipex-portable.tgz
 
 # ---------------------------------------------------------------------------
 # Step 1: Install base packages
