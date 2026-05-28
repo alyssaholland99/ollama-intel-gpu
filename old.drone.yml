@@ -6,10 +6,17 @@ name: stable
 trigger:
   event:
     - push
+    - tag
+    - cron
+  cron:
+    - weekly-build
 
 steps:
   - name: docker build (stable)
     when:
+      event:
+        include: 
+        - push
       branch:
         include:
           - main
