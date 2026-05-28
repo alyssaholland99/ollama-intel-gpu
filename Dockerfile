@@ -44,9 +44,9 @@ ARG LEVEL_ZERO_LOADER_VERSION=v1.21.9
 ARG LEVEL_ZERO_LOADER_DEB=level-zero_1.21.9+u24.04_amd64.deb
 
 # IPEX-LLM Ollama portable package
-ARG IPEXLLM_RELEASE_REPO=alyssaholland99/ipex-llm
-ARG IPEXLLM_RELEASE_VERSION=v3.0.0
-ARG IPEXLLM_PORTABLE_ZIP=ollama-ipex-portable.tgz
+ARG IPEXLLM_RELEASE_REPO=ipex-llm/ipex-llm
+ARG IPEXLLM_RELEASE_VERSION=v2.3.0-nightly
+ARG IPEXLLM_PORTABLE_ZIP=ollama-ipex-llm-2.3.0b20250725-ubuntu.tgz
 
 # ---------------------------------------------------------------------------
 # Step 1: Install base packages
@@ -55,7 +55,8 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -q -y \
         ca-certificates \
         wget \
-        ocl-icd-libopencl1 && \
+        ocl-icd-libopencl1 \
+        zstd && \
     rm -rf /var/lib/apt/lists/*
 
 # ---------------------------------------------------------------------------
@@ -77,6 +78,11 @@ RUN mkdir -p /tmp/gpu && cd /tmp/gpu && \
 RUN wget -q -P /tmp https://github.com/${IPEXLLM_RELEASE_REPO}/releases/download/${IPEXLLM_RELEASE_VERSION}/${IPEXLLM_PORTABLE_ZIP} && \
     tar xf /tmp/${IPEXLLM_PORTABLE_ZIP} --strip-components=1 -C / && \
     rm /tmp/${IPEXLLM_PORTABLE_ZIP}
+
+RUN wget -q -O /tmp/ollama-linux-amd64.tar.zst https://ollama.com/download/ollama-linux-amd64.tar.zst && \
+    mkdir /tmp/ollama && \
+    tar --zstd -xvf /tmp/ollama-linux-amd64.tar.zst -C /tmp/ollama && \
+    mv /tmp/ollama/bin/ollama /
 
 # ---------------------------------------------------------------------------
 # Step 4: Configure runtime environment
