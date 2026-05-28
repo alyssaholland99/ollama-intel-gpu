@@ -8,11 +8,7 @@ trigger:
     - push
 
 steps:
-  - name: docker build (stable)
-    when:
-      branch:
-        include:
-          - main
+  - name: docker build
     image: plugins/docker
     settings:
       username:
